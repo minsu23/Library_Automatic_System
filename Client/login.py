@@ -41,9 +41,9 @@ class LoginWindow(QWidget):
 
         # 로그인 버튼 레이아웃 설정
         layout_h_button = QHBoxLayout()
-        layout_h_button.addStretch()
+        layout_h_button.addStretch()  # 왼쪽 스페이서 추가
         layout_h_button.addWidget(login_button)
-        layout_h_button.addStretch()
+        layout_h_button.addStretch()  # 오른쪽 스페이서 추가
 
         # 전체 레이아웃 설정
         layout = QVBoxLayout()
