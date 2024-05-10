@@ -40,12 +40,13 @@ class BookListWindow(QWidget):
         layout.addWidget(self.tableWidget)
         self.setLayout(layout)
         self.setWindowTitle('Book List')
+
         self.resize(1280, 720)  # 창 크기 설정
 
     def searchBooks(self):
         # 검색 로직 구현
-        # 여기서는 검색 로직을 구현하지 않았지만, 실제로 필요한 검색 기능을 여기에 추가할 수 있습니다.
+        # 여기서는 검색 로직을 구현하지 않음 실제로 필요한 검색 기능을 여기에 추가
         print(f"Searching for {self.comboBox.currentText()} containing '{self.lineEdit_search.text()}'")
 
     def closeEvent(self, event):
-        QApplication.quit()  # 도서 목록 창이 닫힐 때 애플리케이션을 종료합니다.
+        QApplication.quit()  # 도서 목록 창이 닫힐 때 애플리케이션을 종료
