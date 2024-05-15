@@ -1,9 +1,10 @@
 # bookList.py
-from PyQt5.QtWidgets import QWidget, QTableWidget, QTableWidgetItem, QVBoxLayout, QHBoxLayout, QHeaderView, QApplication, QComboBox, QLineEdit, QPushButton
+from PyQt5.QtWidgets import QWidget, QTableWidget, QTableWidgetItem, QVBoxLayout, QHBoxLayout, QHeaderView, QComboBox, QLineEdit, QPushButton
 
 class BookListWindow(QWidget):
-    def __init__(self):
+    def __init__(self, is_admin=False):
         super().__init__()
+        self.is_admin = is_admin
         self.initUI()
 
     def initUI(self):
@@ -29,10 +30,10 @@ class BookListWindow(QWidget):
 
         # 예제 데이터 삽입
         for i in range(10):
-            self.tableWidget.setItem(i, 0, QTableWidgetItem("Example Book " + str(i+1)))
-            self.tableWidget.setItem(i, 1, QTableWidgetItem("Author " + str(i+1)))
-            self.tableWidget.setItem(i, 2, QTableWidgetItem("Publisher " + str(i+1)))
-            self.tableWidget.setItem(i, 3, QTableWidgetItem("Category " + str(i+1)))
+            self.tableWidget.setItem(i, 0, QTableWidgetItem("Example Book " + str(i + 1)))
+            self.tableWidget.setItem(i, 1, QTableWidgetItem("Author " + str(i + 1)))
+            self.tableWidget.setItem(i, 2, QTableWidgetItem("Publisher " + str(i + 1)))
+            self.tableWidget.setItem(i, 3, QTableWidgetItem("Category " + str(i + 1)))
 
         # 메인 레이아웃 설정
         layout = QVBoxLayout()
@@ -49,4 +50,8 @@ class BookListWindow(QWidget):
         print(f"Searching for {self.comboBox.currentText()} containing '{self.lineEdit_search.text()}'")
 
     def closeEvent(self, event):
-        QApplication.quit()  # 도서 목록 창이 닫힐 때 애플리케이션을 종료
+        if self.is_admin:
+            self.hide()  # 창을 숨기도록 설정
+            event.ignore()  # 이벤트를 무시하여 애플리케이션이 종료되지 않도록 함
+        else:
+            event.accept()  # 관리자 이외의 경우에는 창을 닫음

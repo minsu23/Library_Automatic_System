@@ -2,6 +2,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton, QVBoxLayout, QHBoxLayout, QSpacerItem, QSizePolicy
 from bookList import BookListWindow
+from admin import AdminWindow
 
 class LoginWindow(QWidget):
     def __init__(self):
@@ -58,8 +59,17 @@ class LoginWindow(QWidget):
         self.resize(640, 360)  # 창 크기 설정
 
     def login(self):
-        self.book_list_window = BookListWindow()
-        self.book_list_window.show()
+        id_text = self.lineEdit_id.text()
+        password_text = self.lineEdit_password.text()
+
+        # 관리자 계정 확인 (예: 이름이 "admin"이고 학번이 "0000"인 경우)
+        if id_text == 'admin' and password_text == '0000':
+            self.admin_window = AdminWindow()
+            self.admin_window.show()
+        else:
+            self.book_list_window = BookListWindow()
+            self.book_list_window.show()
+        
         self.hide()  # 로그인 창 숨김
 
 if __name__ == '__main__':
