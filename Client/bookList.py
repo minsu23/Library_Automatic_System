@@ -46,7 +46,17 @@ class BookListWindow(QWidget):
 
     def searchBooks(self):
         # 검색 로직 구현
-        # 여기서는 검색 로직을 구현하지 않음 실제로 필요한 검색 기능을 여기에 추가
+        search_text = self.lineEdit_search.text().lower()  # 검색어를 소문자로 변환
+        search_column = self.comboBox.currentIndex()  # 검색할 열의 인덱스 가져오기
+
+        for row in range(self.tableWidget.rowCount()):
+            item = self.tableWidget.item(row, search_column)  # 검색할 열의 아이템 가져오기
+            if item:
+                item_text = item.text().lower()  # 아이템 텍스트를 소문자로 변환
+                if search_text in item_text:
+                    self.tableWidget.showRow(row)  # 검색어가 포함된 행을 보여줌
+                else:
+                    self.tableWidget.hideRow(row)
         print(f"Searching for {self.comboBox.currentText()} containing '{self.lineEdit_search.text()}'")
 
     def closeEvent(self, event):
